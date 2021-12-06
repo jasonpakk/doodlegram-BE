@@ -25,6 +25,24 @@ export const signup = async ({ username, email, password }) => {
   user.username = username;
   user.email = email;
   user.password = password;
+
+  user.name = '';
+  user.year = '';
+  user.picture = '';
+  user.gender = '';
+  user.race = '';
+  user.major = '';
+  user.minor = '';
+  user.modification = '';
+  user.birthday = '';
+  user.role = '';
+  user.home = '';
+  user.quote = '';
+  user.favoriteShoe = '';
+  user.favoriteArtist = '';
+  user.favoriteColor = '';
+  user.phoneType = '';
+
   await user.save();
   return tokenForUser(user);
 };
@@ -34,3 +52,39 @@ function tokenForUser(user) {
   const timestamp = new Date().getTime();
   return jwt.encode({ sub: user.id, iat: timestamp }, process.env.AUTH_SECRET);
 }
+
+export const getUsers = async () => {
+  try {
+    const fetchedUsers = await User.find();
+    return fetchedUsers;
+  } catch (error) {
+    throw new Error(`get users error: ${error}`);
+  }
+};
+
+export const getUser = async (userId) => {
+  try {
+    const user = await User.findById(userId);
+    return user;
+  } catch (error) {
+    throw new Error(`get user error: ${error}`);
+  }
+};
+
+export const updateUser = async (userId, userField) => {
+  try {
+    await User.findByIdAndUpdate(userId, userField);
+    return 'user updated successfully';
+  } catch (error) {
+    throw new Error(`update user error: ${error}`);
+  }
+};
+
+export const deleteUser = async (userId) => {
+  try {
+    await User.findByIdAndDelete(userId);
+    return 'user deleted successfully';
+  } catch (error) {
+    throw new Error(`delete user error: ${error}`);
+  }
+};

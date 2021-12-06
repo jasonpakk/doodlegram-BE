@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 
 // routers
 import apiRouter from './routes/router';
+import userRouter from './routes/user_router';
 import templateRouter from './routes/template_router';
 
 // initialize
@@ -33,7 +34,7 @@ app.use(express.json()); // To parse the incoming requests with JSON payloads
 
 // additional init stuff should go before hitting the routing
 // DB Setup
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/starterpack';
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/socialmedia';
 
 mongoose.connect(mongoURI).then(() => {
   console.log('connected to database:', mongoURI);
@@ -47,6 +48,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', apiRouter);
+app.use('/api/users', userRouter);
 app.use('/api/template', templateRouter);
 
 // START THE SERVER
