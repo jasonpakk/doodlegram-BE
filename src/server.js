@@ -4,7 +4,10 @@ import path from 'path';
 import morgan from 'morgan';
 
 import mongoose from 'mongoose';
-import apiRouter from './router';
+
+// routers
+import apiRouter from './routes/router';
+import templateRouter from './routes/template_router';
 
 // initialize
 const app = express();
@@ -44,6 +47,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', apiRouter);
+app.use('/api/template', templateRouter);
 
 // START THE SERVER
 // =============================================================================

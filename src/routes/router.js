@@ -1,9 +1,8 @@
 import { Router } from 'express';
 
 // import controllers here
-import * as Template from './controllers/template_controller';
-import * as UserController from './controllers/user_controller';
-import { requireSignin } from './services/passport';
+import * as UserController from '../controllers/user_controller';
+import { requireSignin } from '../services/passport';
 // import { requireAuth, requireSignin } from './services/passport';
 
 const router = Router();
@@ -11,19 +10,6 @@ const router = Router();
 router.get('/', (req, res) => {
   res.json({ message: 'welcome to our template api!' });
 });
-
-/// your routes will go here
-const handleGetPosts = async (req, res) => {
-  try {
-    const result = await Template.getTemplates();
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-};
-
-router.route('/posts')
-  .get(handleGetPosts);
 
 router.post('/signin', requireSignin, async (req, res) => {
   try {
