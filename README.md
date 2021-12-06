@@ -6,6 +6,7 @@ Basic starter package for backend API development.
 * node with babel
 * expressjs
 * airbnb eslint rules
+* auth with passport
 
 ## Usage
 In your project directory:
@@ -25,6 +26,23 @@ Once pulled, install your webpack dependencies:
 ```bash
 npm install
 ```
+
+## Creating .ENV
+For signing our JWT’s on the server side we’ll need a secret key. 
+
+Use the dotenv module to import it into your code. IE. Save `AUTH_SECRET="somerandomstringthiscanbeanythingyoushouldmakeityourown"` into a 
+`.env` file that you do not add to git.
+
+Then in your code in any file where you need the secret you can use:
+```
+import dotenv from 'dotenv';
+dotenv.config({ silent: true });
+
+// and then the secret is usable this way:
+process.env.AUTH_SECRET
+```
+
+During deployment for Heroku you’ll need to add AUTH_SECRET to your config variables in Settings!
 
 ## Deploying to Heroku
 * Head over to Heroku and login/sign up. Then, create a new app.
