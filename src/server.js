@@ -8,7 +8,7 @@ import mongoose from 'mongoose';
 // routers
 import apiRouter from './routes/router';
 import userRouter from './routes/user_router';
-import templateRouter from './routes/template_router';
+import postRouter from './routes/post_router';
 
 // initialize
 const app = express();
@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
 
 app.use('/api', apiRouter);
 app.use('/api/users', userRouter);
-app.use('/api/template', templateRouter);
+app.use('/api/posts', postRouter);
 
 // START THE SERVER
 // =============================================================================
