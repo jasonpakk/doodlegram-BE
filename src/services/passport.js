@@ -8,9 +8,8 @@ import User from '../models/user_model';
 // loads in .env file if needed
 dotenv.config({ silent: true });
 
-// options for local strategy, we'll use email AS the username
-// not have separate ones
-const localOptions = { usernameField: 'email' };
+// options for local strategy
+const localOptions = { usernameField: 'username' };
 
 // options for jwt strategy
 // we'll pass in the jwt in an `authorization` header
@@ -22,12 +21,12 @@ const jwtOptions = {
 // NOTE: we are not calling this a bearer token (although it technically is), if you see people use Bearer in front of token on the internet you could either ignore it, use it but then you have to parse it out here as well as prepend it on the frontend.
 
 // username/email + password authentication strategy
-const localLogin = new LocalStrategy(localOptions, async (email, password, done) => {
+const localLogin = new LocalStrategy(localOptions, async (username, password, done) => {
   let user;
   let isMatch;
 
   try {
-    user = await User.findOne({ email });
+    user = await User.findOne({ username });
     isMatch = await user.comparePassword(password);
   } catch (error) {
     // error occured in server

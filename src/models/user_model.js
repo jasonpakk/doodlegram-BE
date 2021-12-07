@@ -3,20 +3,15 @@ import bcrypt from 'bcryptjs';
 
 // create a UserSchema
 const UserSchema = new Schema({
-  username: { type: String },
+  username: { type: String, unique: true },
   email: { type: String, unique: true, lowercase: true },
   password: { type: String },
 
   name: { type: String },
-  year: { type: String },
   picture: { type: String },
   gender: { type: String },
   race: { type: String },
-  major: { type: String },
-  minor: { type: String },
-  modification: { type: String },
   birthday: { type: String },
-  role: { type: String },
   home: { type: String },
   quote: { type: String },
   favoriteShoe: { type: String },

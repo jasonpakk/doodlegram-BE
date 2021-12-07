@@ -4,6 +4,7 @@ import path from 'path';
 import morgan from 'morgan';
 
 import mongoose from 'mongoose';
+import passport from 'passport';
 
 // routers
 import apiRouter from './routes/router';
@@ -31,6 +32,8 @@ app.set('views', path.join(__dirname, '../src/views'));
 // enable json message body for posting data to API
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // To parse the incoming requests with JSON payloads
+
+app.use(passport.initialize());
 
 // additional init stuff should go before hitting the routing
 // DB Setup

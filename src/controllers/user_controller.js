@@ -14,8 +14,15 @@ export const signup = async ({ username, email, password }) => {
     throw new Error('You must provide username, email, and password');
   }
 
+  // See if a user with the given username exists
+  let existingUser = await User.findOne({ username });
+  if (existingUser) {
+    // If a user with username does exist, return an error
+    throw new Error('Username is in use');
+  }
+
   // See if a user with the given email exists
-  const existingUser = await User.findOne({ email });
+  existingUser = await User.findOne({ email });
   if (existingUser) {
     // If a user with email does exist, return an error
     throw new Error('Email is in use');
@@ -27,21 +34,14 @@ export const signup = async ({ username, email, password }) => {
   user.password = password;
 
   user.name = '';
-  user.year = '';
   user.picture = '';
   user.gender = '';
-  user.race = '';
-  user.major = '';
-  user.minor = '';
-  user.modification = '';
   user.birthday = '';
-  user.role = '';
   user.home = '';
   user.quote = '';
   user.favoriteShoe = '';
   user.favoriteArtist = '';
   user.favoriteColor = '';
-  user.phoneType = '';
 
   await user.save();
   return tokenForUser(user);
