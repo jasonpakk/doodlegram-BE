@@ -9,7 +9,7 @@ import passport from 'passport';
 // routers
 import apiRouter from './routes/router';
 import userRouter from './routes/user_router';
-import postRouter from './routes/post_router';
+import doodleRouter from './routes/doodle_router';
 
 // initialize
 const app = express();
@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
 
 app.use('/api', apiRouter);
 app.use('/api/users', userRouter);
-app.use('/api/posts', postRouter);
+app.use('/api/doodles', doodleRouter);
 
 // START THE SERVER
 // =============================================================================

@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import * as Posts from '../controllers/post_controller';
+import * as Doodles from '../controllers/doodle_controller';
 
 const router = Router();
 
 router.route('/')
   .post(async (req, res) => {
     try {
-      const result = await Posts.createPost(req.body, req.user);
+      const result = await Doodles.createDoodle(req.body, req.user);
       res.json(result);
     } catch (error) {
       res.status(500).json({ error });
@@ -14,7 +14,7 @@ router.route('/')
   })
   .get(async (req, res) => {
     try {
-      const result = await Posts.getPosts();
+      const result = await Doodles.getDoodles();
       res.json(result);
     } catch (error) {
       res.status(500).json({ error });
@@ -25,7 +25,7 @@ router
   .route('/:id')
   .get(async (req, res) => {
     try {
-      const result = await Posts.getPost(req.params.id);
+      const result = await Doodles.getDoodle(req.params.id);
       res.json(result);
     } catch (error) {
       res.status(500).json({ error });
@@ -33,7 +33,7 @@ router
   })
   .delete(async (req, res) => {
     try {
-      const result = await Posts.deletePost(req.params.id);
+      const result = await Doodles.deleteDoodle(req.params.id);
       res.json(result);
     } catch (error) {
       res.status(500).json({ error });
@@ -41,7 +41,7 @@ router
   })
   .put(async (req, res) => {
     try {
-      const result = await Posts.updatePost(req.params.id, req.body);
+      const result = await Doodles.updateDoodle(req.params.id, req.body);
       res.json(result);
     } catch (error) {
       res.status(500).json({ error });
