@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import * as UserController from '../controllers/user_controller';
+import * as DoodleController from '../controllers/doodle_controller';
 import { requireSignin } from '../services/passport';
 
 const router = Router();
@@ -53,6 +54,17 @@ router
   .post(async (req, res) => {
     try {
       const result = await UserController.updateUser(req.params.id, req.body);
+      res.json(result);
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  });
+
+router
+  .route('/doodles/:id')
+  .get(async (req, res) => {
+    try {
+      const result = await DoodleController.getUserDoodles(req.params.id);
       res.json(result);
     } catch (error) {
       res.status(500).json({ error });

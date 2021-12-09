@@ -12,14 +12,16 @@ export const createDoodle = async (doodleFields, user) => {
     throw new Error(`create doodle error: ${error}`);
   }
 };
+
 export const getDoodles = async () => {
   try {
-    const fetchedDoodles = await Doodle.find();
+    const fetchedDoodles = await Doodle.find({}).sort({ createdAt: 'descending' });
     return fetchedDoodles;
   } catch (error) {
     throw new Error(`get doodles error: ${error}`);
   }
 };
+
 export const getDoodle = async (id) => {
   try {
     const fetchedDoodle = await Doodle.findById(id).populate('author');
@@ -28,6 +30,16 @@ export const getDoodle = async (id) => {
     throw new Error(`get doodle error: ${error}`);
   }
 };
+
+export const getUserDoodles = async (id) => {
+  try {
+    const fetchedDoodles = await Doodle.find({ author: id });
+    return fetchedDoodles;
+  } catch (error) {
+    throw new Error(`get user doodles error: ${error}`);
+  }
+};
+
 export const deleteDoodle = async (id) => {
   try {
     await Doodle.findByIdAndRemove(id);
@@ -36,6 +48,7 @@ export const deleteDoodle = async (id) => {
     throw new Error(`delete doodle error: ${error}`);
   }
 };
+
 export const updateDoodle = async (id, doodleFields) => {
   try {
     const updatedDoodle = await Doodle.findByIdAndUpdate(id, doodleFields, { new: true });
