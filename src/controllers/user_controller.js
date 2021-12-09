@@ -5,7 +5,11 @@ import User from '../models/user_model';
 dotenv.config({ silent: true });
 
 export const signin = (user) => {
-  return tokenForUser(user);
+  const userXtoken = {
+    token: tokenForUser(user),
+    user,
+  };
+  return userXtoken;
 };
 
 // note the lovely destructuring here indicating that we are passing in an object with these 3 keys
@@ -44,7 +48,13 @@ export const signup = async ({ username, email, password }) => {
   user.favoriteColor = '';
 
   await user.save();
-  return tokenForUser(user);
+
+  const userXtoken = {
+    token: tokenForUser(user),
+    user,
+  };
+
+  return userXtoken;
 };
 
 // encodes a new token for a user object
@@ -73,8 +83,8 @@ export const getUser = async (userId) => {
 
 export const updateUser = async (userId, userField) => {
   try {
-    await User.findByIdAndUpdate(userId, userField);
-    return 'user updated successfully';
+    const user = await User.findByIdAndUpdate(userId, userField, { new: true });
+    return { user };
   } catch (error) {
     throw new Error(`update user error: ${error}`);
   }

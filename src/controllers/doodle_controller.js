@@ -15,7 +15,7 @@ export const createDoodle = async (doodleFields, user) => {
 
 export const getDoodles = async () => {
   try {
-    const fetchedDoodles = await Doodle.find({}).sort({ createdAt: 'descending' });
+    const fetchedDoodles = await Doodle.find({}).sort({ createdAt: 'descending' }).populate('author');
     return fetchedDoodles;
   } catch (error) {
     throw new Error(`get doodles error: ${error}`);
