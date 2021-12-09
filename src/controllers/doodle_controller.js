@@ -33,7 +33,7 @@ export const getDoodle = async (id) => {
 
 export const getUserDoodles = async (id) => {
   try {
-    const fetchedDoodles = await Doodle.find({ author: id });
+    const fetchedDoodles = await Doodle.find({ author: id }).sort({ createdAt: 'descending' });
     return fetchedDoodles;
   } catch (error) {
     throw new Error(`get user doodles error: ${error}`);
