@@ -32,7 +32,7 @@ router
       res.status(500).json({ error });
     }
   })
-  .delete(async (req, res) => {
+  .delete(requireAuth, async (req, res) => {
     try {
       const result = await Doodles.deleteDoodle(req.params.id);
       res.json(result);
@@ -40,7 +40,7 @@ router
       res.status(500).json({ error });
     }
   })
-  .put(async (req, res) => {
+  .put(requireAuth, async (req, res) => {
     try {
       const result = await Doodles.updateDoodle(req.params.id, req.body);
       res.json(result);

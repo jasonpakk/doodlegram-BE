@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as UserController from '../controllers/user_controller';
 import * as DoodleController from '../controllers/doodle_controller';
-import { requireSignin } from '../services/passport';
+import { requireAuth, requireSignin } from '../services/passport';
 
 const router = Router();
 
@@ -49,7 +49,7 @@ router
       res.status(500).json({ error });
     }
   })
-  .delete(async (req, res) => {
+  .delete(requireAuth, async (req, res) => {
     try {
       const result = await UserController.deleteUser(req.params.id);
       res.json(result);
@@ -57,7 +57,7 @@ router
       res.status(500).json({ error });
     }
   })
-  .post(async (req, res) => {
+  .post(requireAuth, async (req, res) => {
     try {
       const result = await UserController.updateUser(req.params.id, req.body);
       res.json(result);
