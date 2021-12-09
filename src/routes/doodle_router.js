@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import * as Doodles from '../controllers/doodle_controller';
+import { requireAuth } from '../services/passport';
 
 const router = Router();
 
 router.route('/')
-  .post(async (req, res) => {
+  .post(requireAuth, async (req, res) => {
     try {
       const result = await Doodles.createDoodle(req.body, req.user);
       res.json(result);

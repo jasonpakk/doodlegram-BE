@@ -2,7 +2,7 @@ import Doodle from '../models/doodle_model';
 
 export const createDoodle = async (doodleFields, user) => {
   const doodle = new Doodle();
-  doodle.getDoodle = doodleFields.doodle;
+  doodle.doodle = doodleFields.url;
   doodle.author = user;
   // TO DO -> add to users list of doodles
   try {

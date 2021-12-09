@@ -4,6 +4,7 @@ import path from 'path';
 import morgan from 'morgan';
 
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import passport from 'passport';
 
 // routers
@@ -12,6 +13,7 @@ import userRouter from './routes/user_router';
 import doodleRouter from './routes/doodle_router';
 
 // initialize
+dotenv.config({ silent: true });
 const app = express();
 
 // enable/disable cross origin resource sharing if necessary

@@ -2,10 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 // create a PostSchema
 const DoodleSchema = new Schema({
-  doodle: {
-    data: Buffer,
-    contentType: String,
-  },
+  doodle: String,
   author: { type: Schema.Types.ObjectId, ref: 'User' },
 }, {
   toObject: { virtuals: true },
