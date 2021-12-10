@@ -4,4 +4,4 @@
 
 The API is currently [deployed here](https://pak-doodlegram.herokuapp.com/) using Heroku.
 
-![](src/static/demo.gif)
+![](static/demo.gif)
